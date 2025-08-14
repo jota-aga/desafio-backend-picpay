@@ -36,7 +36,7 @@ public class UserService {
 	public void depositeToBalance(DepositeDTO depositeDto) throws UserNotFoundException {
 		User user = findById(depositeDto.getUserId());
 		
-		double totalBalance = user.getBalance() + depositeDto.getValue();
+		BigDecimal totalBalance = user.getBalance().add(depositeDto.getValue());
 		
 		user.setBalance(totalBalance);
 		repo.save(user);

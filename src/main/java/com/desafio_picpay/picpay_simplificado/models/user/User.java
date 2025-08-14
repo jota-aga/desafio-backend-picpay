@@ -1,5 +1,7 @@
 package com.desafio_picpay.picpay_simplificado.models.user;
 
+import java.math.BigDecimal;
+
 import com.desafio_picpay.picpay_simplificado.enums.UserType;
 
 import jakarta.persistence.Column;
@@ -29,7 +31,7 @@ public class User {
 	private String password;
 	
 	@Column(name="balance")
-	private double balance;
+	private BigDecimal balance;
 	
 	@Column(name="user_type")
 	private UserType userType;
@@ -44,7 +46,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.userType = userType;
-		this.balance = 0;
+		this.balance = BigDecimal.ZERO;
 	}
 
 	public Long getId() {
@@ -87,11 +89,11 @@ public class User {
 		this.password = password;
 	}
 
-	public double getBalance() {
+	public BigDecimal getBalance() {
 		return balance;
 	}
 
-	public void setBalance(double balance) {
+	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
 	}
 

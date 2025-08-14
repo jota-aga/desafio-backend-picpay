@@ -1,14 +1,16 @@
 package com.desafio_picpay.picpay_simplificado.models.deposite;
 
+import java.math.BigDecimal;
+
 import jakarta.validation.constraints.Positive;
 
 public class DepositeDTO {
 	
 	private Long userId;
 	@Positive(message = "value must be positive.")
-	private double value;
+	private BigDecimal value;
 	
-	public DepositeDTO(Long userId, double value) {
+	public DepositeDTO(Long userId, BigDecimal value) {
 		super();
 		this.userId = userId;
 		this.value = value;
@@ -26,11 +28,11 @@ public class DepositeDTO {
 		this.userId = userId;
 	}
 
-	public double getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 
-	public void setValue(double value) {
+	public void setValue(BigDecimal value) {
 		this.value = value;
 	} 
 }

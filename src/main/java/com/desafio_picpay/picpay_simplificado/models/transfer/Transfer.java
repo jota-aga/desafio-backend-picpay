@@ -1,5 +1,7 @@
 package com.desafio_picpay.picpay_simplificado.models.transfer;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ public class Transfer {
 	private Long id;
 	
 	@Column(name="value")
-	private double value;
+	private BigDecimal value;
 	
 	@Column(name="id_payer")
 	private Long payer;
@@ -23,7 +25,7 @@ public class Transfer {
 	@Column(name="id_payee")
 	private Long payee;
 
-	public Transfer(double value, Long payer, Long payee) {
+	public Transfer(BigDecimal value, Long payer, Long payee) {
 		super();
 		this.value = value;
 		this.payer = payer;
@@ -42,11 +44,11 @@ public class Transfer {
 		this.id = id;
 	}
 
-	public double getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 
-	public void setValue(double value) {
+	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
 

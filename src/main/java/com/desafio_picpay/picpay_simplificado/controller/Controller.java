@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.desafio_picpay.picpay_simplificado.exceptions.BalanceIsNotEnoughException;
 import com.desafio_picpay.picpay_simplificado.exceptions.MerchantCantTransferException;
+import com.desafio_picpay.picpay_simplificado.exceptions.TransferNotAuthorizedException;
 import com.desafio_picpay.picpay_simplificado.exceptions.UserNotFoundException;
 import com.desafio_picpay.picpay_simplificado.models.deposite.DepositeDTO;
 import com.desafio_picpay.picpay_simplificado.models.transfer.Transfer;
@@ -48,7 +48,7 @@ public class Controller {
 	}
 	
 	@PostMapping("/transfer")
-	public ResponseEntity<String> transfer(@Valid @RequestBody TransferDTO transferDTO) throws MerchantCantTransferException, BalanceIsNotEnoughException, UserNotFoundException{
+	public ResponseEntity<String> transfer(@Valid @RequestBody TransferDTO transferDTO) throws MerchantCantTransferException, BalanceIsNotEnoughException, UserNotFoundException, TransferNotAuthorizedException{
 		Transfer transfer =  transferDTO.cast();
 		transferService.saveTransfer(transfer);
 		

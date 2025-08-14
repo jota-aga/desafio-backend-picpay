@@ -1,24 +1,21 @@
 package com.desafio_picpay.picpay_simplificado.infra;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.desafio_picpay.picpay_simplificado.exceptions.BalanceIsNotEnoughException;
 import com.desafio_picpay.picpay_simplificado.exceptions.MerchantCantTransferException;
 import com.desafio_picpay.picpay_simplificado.exceptions.UserNotFoundException;
 
 @ControllerAdvice
-public class ExceptionGloblaHandler{
+public class ExceptionGloblalHandler{
 	
 	@ExceptionHandler(UserNotFoundException.class)
 	public ResponseEntity<String> userNotFoundExceptionHandler(UserNotFoundException e){
@@ -39,7 +36,7 @@ public class ExceptionGloblaHandler{
 	}
 	
 	 @ExceptionHandler(MethodArgumentNotValidException.class)
-	    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException e) {
+	    public ResponseEntity<Map<String, String>> methodArgumentNotValidHandler(MethodArgumentNotValidException e) {
 	        Map<String, String> errors = new HashMap<>();
 	        
 	        e.getBindingResult().getAllErrors().forEach(error -> {
@@ -50,4 +47,10 @@ public class ExceptionGloblaHandler{
 
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
 	    }
+	 
+	 @ExceptionHandler(DataIntegrityViolationException.class)
+	 public ResponseEntity<String> dataIntegrityViolationHandler(DataIntegrityViolationException e){
+			String messageError = "Duplicate CPF or Email.";
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(messageError);
+		}
 }

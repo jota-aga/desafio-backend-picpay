@@ -1,16 +1,18 @@
 package com.desafio_picpay.picpay_simplificado.models.transfer;
 
+import java.math.BigDecimal;
+
 import jakarta.validation.constraints.Positive;
 
 public class TransferDTO {
 	@Positive(message = "value must be positive.")
-	private double value;
+	private BigDecimal value;
 	
 	private Long payer;
 	
 	private Long payee;
 
-	public TransferDTO(@Positive double value, Long payer, Long payee) {
+	public TransferDTO(@Positive BigDecimal value, Long payer, Long payee) {
 		super();
 		this.value = value;
 		this.payer = payer;
@@ -23,11 +25,11 @@ public class TransferDTO {
 		return transfer;
 	}
 
-	public double getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 
-	public void setValue(double value) {
+	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
 
